@@ -7,9 +7,10 @@ function App() {
   useEffect(() => {
     const initLiff = async () => {
       try {
+        console.log("LIFF ID:", process.env.REACT_APP_LIFF_ID);
         await liff.init({ liffId: process.env.REACT_APP_LIFF_ID });
         if (!liff.isLoggedIn()) {
-          liff.login(); // login ใหม่เพื่อให้สิทธิ์ใหม่มีผล
+          liff.login();
         } else {
           const userProfile = await liff.getProfile();
           setProfile(userProfile);
@@ -18,25 +19,16 @@ function App() {
         console.error("LIFF init failed:", err);
       }
     };
-  
-    // ✅ บังคับ logout ก่อน init เพื่อเคลียร์ token เก่า
-    liff.logout();
-    window.location.reload();
     initLiff();
   }, []);
-  
 
   const handleSendMessage = async () => {
-    try {
-      await liff.sendMessages([
-        { type: "text", text: `Hello, ${profile.displayName}! 👋` }
-      ]);
-      alert("ส่งข้อความสำเร็จ!");
-    } catch (err) {
-      console.error("Error sending message:", err);
-      alert("ไม่สามารถส่งข้อความได้: " + err.message);
-    }
+    await liff.sendMessages([
+      { type: "text", text: `Hello, ${profile.displayName}! 👋` }
+    ]);
+    alert("ข้อความถูกส่งใน LINE แล้ว!");
   };
+
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       {profile ? (
