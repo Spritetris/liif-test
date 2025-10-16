@@ -40,6 +40,7 @@ function App() {
           />
           <h2>{profile.displayName}</h2>
           <p>{profile.statusMessage}</p>
+          <p>{profile.userId}</p>
           <button onClick={handleSendMessage}>ส่งข้อความ</button>
         </>
       ) : (
