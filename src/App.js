@@ -26,7 +26,7 @@ function App() {
     await liff.sendMessages([
       {
         type: "text",
-        text: `Hello, ${profile.displayName}! 👋👋`
+        text: `Hello, ${profile.displayName}! 👋`
       }
     ]);
     alert("ข้อความถูกส่งไปใน LINE แล้ว!");
